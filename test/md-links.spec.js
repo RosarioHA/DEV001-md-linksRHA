@@ -6,7 +6,7 @@ describe('mdLinks', () => {
   // });
   it('debe rechazar la promesa si no encuentra un path', () => {
     return mdLinks('fake/path.md').catch((error) => {
-expect(error).toBe('ésta ruta no existe');
+      expect(error).toBe('ésta ruta no existe');
     });
-    });
+  });
 });
