@@ -1,6 +1,6 @@
-const { mdLinks } = require('./index.js');
+const { mdLinks } = require('./index');
 
-mdLinks('/fakepath/').then(() => {})
+mdLinks('./README.md').then(() => {})
   .catch((error) => {
     console.log(error);
   });

@@ -1,23 +1,33 @@
-const fs = require('fs');
+/* eslint-disable prefer-promise-reject-errors */
+// const fs = require('fs');
+const { pathExists, absolutePath } = require('./functions');
 
-const mdLinks = (path, options) => {
-  return new Promise((resolve, reject) => {
-    // identificar si existe una ruta.
-    if (fs.existsSync(path)) {
-      resolve();
-    // chequear si es una ruta absoluta. Si no, CONVERTIRLA EN UNA.
-      // chequear si es un archivo o directorio.
-      // chequear si es un archivo .md: ver funcion de node para verificar extención y compararla con .md
-      // chequear si el archivo contiene links
-      // OBTENER LINKS
-      // son links válidos?
-      // GENERAR INFORME
-    } else {
-      // si no existe una ruta, se rechaza la promesa.
-      reject('ésta ruta no existe');
-    }
-  });
-};
+const mdLinks = (path) => new Promise((resolve, reject) => {
+  // identificar si existe la ruta
+  if (!pathExists(path)) {
+    // no existe la ruta, rechaza la promesa
+    reject(new Error('la ruta no existe'));
+  } else {
+    // revisar si la ruta es absoluta, si no, convertirla
+    resolve(absolutePath(path));
+  }
+});
+
+// const mdLinks = (path, options) => new Promise((resolve, reject) => {
+//   // identificar si existe una ruta.
+//   if (pathExists(path)) { // si no, lleva al mensaje de error, si sí, entra al if
+//     resolve('la ruta existe');
+//     // función toAbsolute que analiza si es absoluta o relativa, convierte a absoluta
+//     // función fileOrDoc revisa si es archivo o directorio. Si sí entra al if, si no va a error
+//     // función fileType ve si es un archivo .md. Si sí entra al if y si no va a error.
+//     // función pathsArray que retorna un array de archivos .md
+//     // if (){ //el array tiene contenido (pathsArray.lenght), entra al if. Si no va a error.
+//     // recorrer los archivos10 con pathsArray.forEach y ver si son válidos
+//   } else {
+//     // si no existe una ruta, se rechaza la promesa.
+//     reject(new Error('la ruta no existe'));
+//   }
+// });
 
 module.exports = {
   mdLinks,
