@@ -1,17 +1,15 @@
 /* eslint-disable prefer-promise-reject-errors */
-
 // const fs = require('fs');
 const { pathExists, absolutePath } = require('./functions');
 
-const mdLinks = (path, options) => new Promise((resolve, reject) => {
+const mdLinks = (path) => new Promise((resolve, reject) => {
   // identificar si existe la ruta
   if (!pathExists(path)) {
     // no existe la ruta, rechaza la promesa
     reject(new Error('la ruta no existe'));
   } else {
     // revisar si la ruta es absoluta, si no, convertirla
-    console.log('entramos al else');
-    // absolutePath(path);
+    resolve(absolutePath(path));
   }
 });
 
