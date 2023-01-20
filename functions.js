@@ -19,11 +19,11 @@ const fileExt = (pathAbsolute) => {
 };
 
 // función que lee los archivos .md
-// .readFileSync lee el contenido del archivo
+// .readFile lee el contenido del archivo
 // eslint-disable-next-line consistent-return
 const readFile = (mdPaths) => {
   if (mdPaths === true) {
-    return fs.readFileSync(mdPaths, 'utf-8');
+    return fs.readFile(mdPaths, 'utf-8');
   }
 };
 
