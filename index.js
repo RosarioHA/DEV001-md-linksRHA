@@ -1,7 +1,10 @@
 /* eslint-disable prefer-promise-reject-errors */
 // const fs = require('fs');
 const {
-  pathExists, absolutePath, fileExt, readFile,
+  pathExists,
+  absolutePath,
+  fileExt,
+  readFile,
 } = require('./functions');
 
 const mdLinks = (path) => new Promise((resolve, reject) => {

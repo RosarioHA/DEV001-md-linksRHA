@@ -21,11 +21,15 @@ const fileExt = (pathAbsolute) => {
 // función que lee los archivos .md
 // .readFile lee el contenido del archivo
 // eslint-disable-next-line consistent-return
-const readFile = (mdPaths) => {
-  if (mdPaths === true) {
-    return fs.readFile(mdPaths, 'utf-8');
-  }
-};
+const readFile = (mdPaths) => new Promise((resolve, reject) => {
+  fs.readFile(mdPaths, 'utf-8', (error, data) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(data);
+    }
+  });
+});
 
 module.exports = {
   pathExists,
