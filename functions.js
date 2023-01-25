@@ -8,7 +8,32 @@ const pathExists = (route) => fs.existsSync(route);
 // .isAbsolute ve si es absoluta; .resolve la transforma de no serlo.
 const absolutePath = (route) => (path.isAbsolute(route) ? route : path.resolve(route));
 
+// función que revisa si el archivo es de tipo .md
+// .extname devuelve la extención del archivo.
+const fileExt = (pathAbsolute) => {
+  const filePath = path.extname(pathAbsolute);
+  if (filePath === '.md') {
+    return true;
+  }
+  return false;
+};
+
+// función que lee los archivos .md
+// .readFile lee el contenido del archivo
+// eslint-disable-next-line consistent-return
+const readFile = (mdPaths) => new Promise((resolve, reject) => {
+  fs.readFile(mdPaths, 'utf-8', (error, data) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(data);
+    }
+  });
+});
+
 module.exports = {
   pathExists,
   absolutePath,
+  fileExt,
+  readFile,
 };

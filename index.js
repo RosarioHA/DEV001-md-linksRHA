@@ -1,15 +1,30 @@
 /* eslint-disable prefer-promise-reject-errors */
 // const fs = require('fs');
-const { pathExists, absolutePath } = require('./functions');
+const {
+  pathExists,
+  absolutePath,
+  fileExt,
+  readFile,
+} = require('./functions');
 
 const mdLinks = (path) => new Promise((resolve, reject) => {
-  // identificar si existe la ruta
+  // EXISTE LA RUTA?
   if (!pathExists(path)) {
-    // no existe la ruta, rechaza la promesa
+    // No existe la ruta, rechaza la promesa
     reject(new Error('la ruta no existe'));
   } else {
-    // revisar si la ruta es absoluta, si no, convertirla
-    resolve(absolutePath(path));
+    // La ruta existe. ES ABSOLUTA O RELATIVA?
+    console.log('la ruta sí existe');
+    const pathAbsolute = absolutePath(path);
+    // ES UN ARCHIVO .MD?
+    if (!fileExt(pathAbsolute)) {
+      reject(new Error('el archivo no es de tipo .md'));
+    } else {
+      // EL ARCHIVO CONTIENE LINKS?
+      console.log('el archivo es de tipo .md');
+      // leer el archivo.
+      readFile(pathAbsolute);
+    }
   }
 });
 
