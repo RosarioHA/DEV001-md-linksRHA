@@ -1,5 +1,4 @@
 /* eslint-disable prefer-promise-reject-errors */
-// const fs = require('fs');
 const {
   pathExists,
   absolutePath,
@@ -28,13 +27,18 @@ const mdLinks = (path) => new Promise((resolve, reject) => {
   }
 });
 
+console.log(readFile('./README.md')); // promise pending
+console.log(fileExt('./README.md')); // true
+console.log(pathExists('./fakefile.json')); // false
+console.log(absolutePath('./package.json')); // /Users/rosario/Documents/GitHub/DEV001-md-linksRHA/package.json
+
 // const mdLinks = (path, options) => new Promise((resolve, reject) => {
 //   // identificar si existe una ruta.
 //   if (pathExists(path)) { // si no, lleva al mensaje de error, si sí, entra al if
 //     resolve('la ruta existe');
 //     // función toAbsolute que analiza si es absoluta o relativa, convierte a absoluta
 //     // función fileOrDoc revisa si es archivo o directorio. Si sí entra al if, si no va a error
-//     // función fileType ve si es un archivo .md. Si sí entra al if y si no va a error.
+//     // función fileExt ve si es un archivo .md. Si sí entra al if y si no va a error.
 //     // función pathsArray que retorna un array de archivos .md
 //     // if (){ //el array tiene contenido (pathsArray.lenght), entra al if. Si no va a error.
 //     // recorrer los archivos10 con pathsArray.forEach y ver si son válidos
