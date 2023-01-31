@@ -2,10 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 // función que analiza si existe el path
+// .existsSync
 const pathExists = (route) => fs.existsSync(route);
 
 // función que revisa si la ruta es absoluta, si no, la transforma a una.
 // .isAbsolute ve si es absoluta; .resolve la transforma de no serlo.
+// Operador ternario condition ? true : false
 const absolutePath = (route) => (path.isAbsolute(route) ? route : path.resolve(route));
 
 // función que revisa si el archivo es de tipo .md
@@ -19,16 +21,36 @@ const fileExt = (pathAbsolute) => {
 };
 
 // función que lee los archivos .md
-// .readFile lee el contenido del archivo
+// fs.readFile lee el contenido del archivo
 // eslint-disable-next-line consistent-return
-const readFile = (mdPaths) => new Promise((resolve, reject) => {
-  fs.readFile(mdPaths, 'utf-8', (error, data) => {
+const readFile = (mdPath) => new Promise((resolve, reject) => {
+  fs.readFile(mdPath, 'utf-8', (error, file) => {
     if (error) {
       reject(error);
     } else {
-      resolve(data);
+      resolve(file);
     }
   });
+});
+
+// función que obtiene los links del archivo .md
+const getLinks = (mdPath) => new Promise((resolve, reject) => {
+  const links = [];
+  readFile(mdPath)
+    .then((file) => {
+      const linksURL = /\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g;
+      let match = linksURL.exec(file);
+      while (match !== null) {
+        links.push({
+          href: match[2],
+          text: match[1],
+          file: mdPath,
+        });
+        match = linksURL.exec(file);
+      }
+      resolve(links);
+    })
+    .catch((error) => reject(error));
 });
 
 module.exports = {
@@ -36,4 +58,5 @@ module.exports = {
   absolutePath,
   fileExt,
   readFile,
+  getLinks,
 };
