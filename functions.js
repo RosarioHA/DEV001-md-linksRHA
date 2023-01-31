@@ -16,8 +16,7 @@ const fileExt = (pathAbsolute) => {
   const filePath = path.extname(pathAbsolute);
   if (filePath === '.md') {
     return true;
-  }
-  return false;
+  } return false;
 };
 
 // función que lee los archivos .md

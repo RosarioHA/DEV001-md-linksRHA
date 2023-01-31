@@ -1,6 +1,6 @@
 const { mdLinks } = require('./index');
 
-mdLinks('/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/pruebas/pruebaSinLinks.md')
+mdLinks('./pruebas/pruebaConLinks.md')
   .then((result) => {
     console.log(result);
   })
