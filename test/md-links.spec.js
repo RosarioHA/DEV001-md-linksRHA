@@ -11,6 +11,7 @@ describe('mdLinks', () => {
       expect(mdLinks).toBe(typeof Promise);
     })
     .catch((error) => reject(error)));
+  //
   it('debe rechazar la promesa si no encuentra un path', () => mdLinks('fake/path.md').catch((error) => {
     expect(error).toStrictEqual(new Error('La ruta no existe'));
   }));

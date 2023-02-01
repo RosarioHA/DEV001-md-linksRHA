@@ -48,6 +48,7 @@ describe('readFile', () => {
   });
 });
 
+// no pasa
 describe('getLinks', () => {
   it('debe obtener los links del archivo .md', () => {
     getLinks('./pruebas/pruebaConLinks.md');

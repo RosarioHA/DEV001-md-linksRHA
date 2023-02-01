@@ -35,12 +35,6 @@ const mdLinks = (path, options) => new Promise((resolve, reject) => {
   }
 });
 
-console.log(pathExists('./fakefile.json')); // false
-console.log(absolutePath('./package.json')); // /Users/rosario/Documents/GitHub/DEV001-md-linksRHA/package.json
-console.log(fileExt('./README.md')); // true
-console.log(readFile('./README.md')); // promise pending
-console.log(getLinks('/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/README.md')); // promise pending
-
 module.exports = {
   mdLinks,
 };
