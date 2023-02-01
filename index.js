@@ -3,7 +3,6 @@ const {
   pathExists,
   absolutePath,
   fileExt,
-  readFile,
   getLinks,
 } = require('./functions');
 
