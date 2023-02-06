@@ -86,7 +86,7 @@ describe('getLinks', () => {
   });
 });
 
-// NO PASA
+// FALTA TESTEAR LA SEGUNDA PARTE CON MOCK
 describe('getStatus', () => {
   it('debe ser una funcion', () => {
     expect(typeof getStatus).toBe('function');
