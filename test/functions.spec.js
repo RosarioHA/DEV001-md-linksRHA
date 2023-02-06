@@ -5,7 +5,13 @@ const {
   fileExt,
   readFile,
   getLinks,
+  getStatus,
 } = require('../functions');
+
+// el metodo process.cwd = current working directory
+const tryPathAbsolute = `${process.cwd()}`;
+// const tryPathTest = [`${tryPathAbsolute}\\test\\pruebaTest.md`];
+// console.log('soy en console.log de tryPathTest', tryPathTest);
 
 describe('pathExists', () => {
   it('debe retornar true si existe el archivo', () => {
@@ -21,11 +27,11 @@ describe('pathExists', () => {
 describe('absolutePath', () => {
   it('debe cambiar la ruta a absoluta si es relativa', () => {
     absolutePath('./README.md');
-    expect(absolutePath('./README.md')).toEqual('/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/README.md');
+    expect(absolutePath('./README.md')).toEqual(`${tryPathAbsolute}/README.md`);
   });
   it('debe devolver la ruta si ya es absoluta', () => {
-    absolutePath('/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/README.md');
-    expect(absolutePath('/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/README.md')).toEqual('/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/README.md');
+    absolutePath(`${tryPathAbsolute}/README.md`);
+    expect(absolutePath(`${tryPathAbsolute}/README.md`)).toEqual(`${tryPathAbsolute}/README.md`);
   });
 });
 
@@ -56,19 +62,26 @@ describe('getLinks', () => {
       {
         href: 'https://es.wikipedia.org/wiki/Markdown',
         text: 'Markdown',
-        file: '/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/pruebas/pruebaConLinks.md',
+        file: `${tryPathAbsolute}/pruebas/pruebaConLinks.md`,
       },
       {
         href: 'https://nodejs.org/',
         text: 'Node.js',
-        file: '/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/pruebas/pruebaConLinks.md',
+        file: `${tryPathAbsolute}/pruebas/pruebaConLinks.md`,
       },
       {
         href: 'https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg',
         text: 'md-links',
-        file: '/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/pruebas/pruebaConLinks.md',
+        file: `${tryPathAbsolute}/pruebas/pruebaConLinks.md`,
       },
     ];
-    expect(getLinks('./pruebas/pruebaConLinks.md')).toEqual(linksObt);
+    expect(getLinks(`${tryPathAbsolute}/pruebas/pruebaConLinks.md`)).toEqual(linksObt);
+  });
+});
+
+describe('getStatus', () => {
+  it('debe verificar el estado de los links', () => {
+    getStatus('https://nodejs.org/');
+    expect(getStatus('https://nodejs.org/')).toEqual('https://nodejs.org/');
   });
 });
