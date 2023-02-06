@@ -26,6 +26,8 @@ const mdLinks = (path, options) => new Promise((resolve, reject) => {
       getLinks(pathAbsolute).then((arr) => {
         if (arr.length === '0') {
           reject(new Error('El archivo no contiene links'));
+        } else if (options === { validate: false }) {
+          resolve(arr);
         } else {
           console.log('el archivo contiene los siguientes links');
           getStatus(arr).then((res) => {
