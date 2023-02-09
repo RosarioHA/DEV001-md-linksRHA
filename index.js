@@ -21,6 +21,7 @@ const mdLinks = (path, options) => new Promise((resolve, reject) => {
       reject(new Error('El archivo no es de tipo Mark Down'));
     } else {
       // El archivo contiene links?
+      // hola
       console.log('el archivo es de tipo .md');
       // leer el archivo.
       getLinks(pathAbsolute).then((arr) => {
