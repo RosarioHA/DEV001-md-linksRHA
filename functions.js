@@ -56,31 +56,9 @@ const getLinks = (mdPath) => new Promise((resolve, reject) => {
 });
 
 // función que verifica el status de los links
-const array = [
-  {
-    href: 'https://es.wikipedia.org/wiki/Markdown',
-    text: 'Markdown',
-    file: '/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/pruebas/pruebaConLinks.md',
-  },
-  {
-    href: 'https://nodejs.org/',
-    text: 'Node.js',
-    file: '/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/pruebas/pruebaConLinks.md',
-  },
-  {
-    href: 'https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg',
-    text: 'md-links',
-    file: '/Users/rosario/Documents/GitHub/DEV001-md-linksRHA/pruebas/pruebaConLinks.md',
-  },
-];
-
 const getStatus = (urls) => Promise.all(urls.map((link) => axios.get(link.href)
-  .then((response) => {
-    console.log(response.status);
-    return { ...link, status: response.status, message: 'ok' };
-  })
-  .catch((error) => ({ ...link, status: error.status, message: 'fail' }))));
-getStatus(array).then((resolve) => console.log(resolve));
+  .then((response) => ({ ...link, status: response.status, message: 'ok' }))
+  .catch((error) => ({ ...link, status: error.response.status, message: 'fail' }))));
 
 module.exports = {
   pathExists,

@@ -3,8 +3,8 @@ const {
   pathExists,
   absolutePath,
   fileExt,
-  readFile,
   getLinks,
+  getStatus,
 } = require('./functions');
 
 const mdLinks = (path, options) => new Promise((resolve, reject) => {
@@ -23,14 +23,18 @@ const mdLinks = (path, options) => new Promise((resolve, reject) => {
       // El archivo contiene links?
       console.log('el archivo es de tipo .md');
       // leer el archivo.
-      const arr = getLinks(pathAbsolute).then;
-      console.log(arr);
-      if (arr.length === '0') {
-        reject(new Error('El archivo no contiene links'));
-      } else {
-        const result = getLinks(pathAbsolute);
-        resolve(result);
-      }
+      getLinks(pathAbsolute).then((arr) => {
+        if (arr.length === '0') {
+          reject(new Error('El archivo no contiene links'));
+        } else if (options === { validate: false }) {
+          resolve(arr);
+        } else {
+          console.log('el archivo contiene los siguientes links');
+          getStatus(arr).then((res) => {
+            resolve(res);
+          });
+        }
+      });
     }
   }
 });
