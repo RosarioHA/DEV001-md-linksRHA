@@ -1,6 +1,6 @@
 const { mdLinks } = require('./index');
 
-mdLinks('./pruebas/pruebaConLinks.md', 'validate')
+mdLinks('./pruebas/pruebaConLinks.md')
   .then((result) => {
     console.log(result);
   })

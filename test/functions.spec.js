@@ -46,7 +46,7 @@ describe('fileExt', () => {
   });
 });
 
-// repasar documentacion Jest - Promises
+// repasar documentacion Jest - Promises https://jestjs.io/docs/asynchronous
 describe('readFile', () => {
   it('debe ser una promesa', () => readFile()
     .then(() => {
