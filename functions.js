@@ -4,7 +4,7 @@ const path = require('path');
 const axios = require('axios');
 
 // función que analiza si existe el path
-// .existsSync
+// .existsSync es un booleano que retorna true si el path existe, y false si es que no.
 const pathExists = (route) => fs.existsSync(route);
 
 // función que revisa si la ruta es absoluta, si no, la transforma a una.
@@ -35,7 +35,7 @@ const readFile = (mdPath) => new Promise((resolve, reject) => {
 });
 
 // función que obtiene los links del archivo .md
-// .exec indica que es linksURL es una expresión regular
+// .exec indica que linksURL es una expresión regular
 const getLinks = (mdPath) => new Promise((resolve, reject) => {
   const linksArr = [];
   readFile(mdPath)
@@ -56,6 +56,7 @@ const getLinks = (mdPath) => new Promise((resolve, reject) => {
 });
 
 // función que verifica el status de los links
+// axios es el paquete de npm que permite hacer llamadas de contenido o peticiones a un enlace HTTP
 const getStatus = (urls) => Promise.all(urls.map((link) => axios.get(link.href)
   .then((response) => ({ ...link, status: response.status, message: 'ok' }))
   .catch((error) => ({ ...link, status: error.response.status, message: 'fail' }))));

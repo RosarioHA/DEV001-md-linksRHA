@@ -7,7 +7,7 @@ const {
   getStatus,
 } = require('./functions');
 
-const mdLinks = (path, options) => new Promise((resolve, reject) => {
+const mdLinks = (path /* options */) => new Promise((resolve, reject) => {
   // Existe la ruta?
   if (!pathExists(path)) {
     // No existe la ruta, rechaza la promesa
@@ -27,9 +27,9 @@ const mdLinks = (path, options) => new Promise((resolve, reject) => {
       getLinks(pathAbsolute).then((arr) => {
         if (arr.length === '0') {
           reject(new Error('El archivo no contiene links'));
-        } else if (options === { validate: false }) {
+        } /* else if (options === { validate: true }) {
           resolve(arr);
-        } else {
+        } */ else {
           console.log('el archivo contiene los siguientes links');
           getStatus(arr).then((res) => {
             resolve(res);
