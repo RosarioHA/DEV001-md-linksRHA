@@ -86,7 +86,7 @@ describe('getLinks', () => {
   });
 });
 
-// FALTA TESTEAR LA SEGUNDA PARTE CON MOCK
+// FALTA TESTEAR LA SEGUNDA PARTE CON MOCK, agregar a issues
 describe('getStatus', () => {
   it('debe ser una funcion', () => {
     expect(typeof getStatus).toBe('function');

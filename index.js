@@ -14,23 +14,19 @@ const mdLinks = (path /* options */) => new Promise((resolve, reject) => {
     reject(new Error('La ruta no existe'));
   } else {
     // La ruta existe. Es absoluta o relativa?
-    console.log('la ruta sí existe');
     const pathAbsolute = absolutePath(path);
     // Es un archivo de tipo .md?
     if (!fileExt(pathAbsolute)) {
       reject(new Error('El archivo no es de tipo Mark Down'));
     } else {
       // El archivo contiene links?
-      // hola
-      console.log('el archivo es de tipo .md');
       // leer el archivo.
       getLinks(pathAbsolute).then((arr) => {
         if (arr.length === '0') {
           reject(new Error('El archivo no contiene links'));
-        } /* else if (options === { validate: true }) {
+          /* } else if (options === { validate: true }) {
           resolve(arr);
-        } */ else {
-          console.log('el archivo contiene los siguientes links');
+         */ } else {
           getStatus(arr).then((res) => {
             resolve(res);
           });

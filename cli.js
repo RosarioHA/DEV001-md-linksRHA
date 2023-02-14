@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { mdLinks } = require('./index');
 
 mdLinks('./pruebas/pruebaConLinks.md')
