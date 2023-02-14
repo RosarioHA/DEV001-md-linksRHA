@@ -8,7 +8,7 @@ const {
   getStatus,
 } = require('../functions');
 
-// metodo process.cwd = current working directory
+// Method process.cwd = current working directory
 const tryPathAbsolute = `${process.cwd()}`;
 // const tryPathTest = [`${tryPathAbsolute}\\test\\pruebaTest.md`];
 // console.log('soy en console.log de tryPathTest', tryPathTest);

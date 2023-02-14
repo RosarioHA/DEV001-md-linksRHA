@@ -8,25 +8,26 @@ const {
 } = require('./functions');
 
 const mdLinks = (path /* options */) => new Promise((resolve, reject) => {
-  // Existe la ruta?
+  // Does the path exists?
   if (!pathExists(path)) {
-    // No existe la ruta, rechaza la promesa
-    reject(new Error('La ruta no existe'));
+    // The path doesn't exist, reject promise
+    reject(new Error('The path does not exist'));
   } else {
-    // La ruta existe. Es absoluta o relativa?
+    // The path exists, it is absolute or relative?
     const pathAbsolute = absolutePath(path);
-    // Es un archivo de tipo .md?
+    // Is it a Mark Down type file?
     if (!fileExt(pathAbsolute)) {
-      reject(new Error('El archivo no es de tipo Mark Down'));
+      reject(new Error('This is not a Mark Down file'));
     } else {
-      // El archivo contiene links?
-      // leer el archivo.
+      // Does the file contain links?
+      // Read file and get links
       getLinks(pathAbsolute).then((arr) => {
         if (arr.length === '0') {
-          reject(new Error('El archivo no contiene links'));
+          reject(new Error('The file does not content links'));
           /* } else if (options === { validate: true }) {
           resolve(arr);
          */ } else {
+          // get those link's status
           getStatus(arr).then((res) => {
             resolve(res);
           });

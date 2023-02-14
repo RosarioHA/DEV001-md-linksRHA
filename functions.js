@@ -3,17 +3,17 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 
-// función que analiza si existe el path
-// .existsSync es un booleano que retorna true si el path existe, y false si es que no.
+// Function that analyses if the path exists.
+// .existsSync is a boolean that returns true if the path exists, and false if it does not.
 const pathExists = (route) => fs.existsSync(route);
 
-// función que revisa si la ruta es absoluta, si no, la transforma a una.
-// .isAbsolute ve si es absoluta; .resolve la transforma de no serlo.
-// Operador ternario condition ? true : false
+// Function that checks if the path is absolute; if not, it transforms it into one.
+// .isAbsolute checks if the path is absolute; .resolve transforms it into one if it's not.
+// Ternary operator condition ? true : false
 const absolutePath = (route) => (path.isAbsolute(route) ? route : path.resolve(route));
 
-// función que revisa si el archivo es de tipo .md
-// .extname devuelve la extención del archivo.
+// Function that checks if the file is .md type.
+// .extname returns the file extension.
 const fileExt = (pathAbsolute) => {
   const filePath = path.extname(pathAbsolute);
   if (filePath === '.md') {
@@ -21,8 +21,8 @@ const fileExt = (pathAbsolute) => {
   } return false;
 };
 
-// función que lee los archivos .md
-// fs.readFile lee el contenido del archivo
+// Function thar reads the .md files.
+// fs.readFile reads the file content.
 // eslint-disable-next-line consistent-return
 const readFile = (mdPath) => new Promise((resolve, reject) => {
   fs.readFile(mdPath, 'utf-8', (error, file) => {
@@ -34,8 +34,8 @@ const readFile = (mdPath) => new Promise((resolve, reject) => {
   });
 });
 
-// función que obtiene los links del archivo .md
-// .exec indica que linksURL es una expresión regular
+// Function that get the links of the .md file.
+// .exec indicates that linksURL is a regular expression.
 const getLinks = (mdPath) => new Promise((resolve, reject) => {
   const linksArr = [];
   readFile(mdPath)
@@ -55,8 +55,8 @@ const getLinks = (mdPath) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// función que verifica el status de los links
-// axios es el paquete de npm que permite hacer llamadas de contenido o peticiones a un enlace HTTP
+// Function that verifies the links status.
+// axios is the npm package that allows requests or content calls to be made to an HTTP link.
 const getStatus = (urls) => Promise.all(urls.map((link) => axios.get(link.href)
   .then((response) => ({ ...link, status: response.status, message: 'ok' }))
   .catch((error) => ({ ...link, status: error.response.status, message: 'fail' }))));
